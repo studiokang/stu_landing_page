@@ -112,11 +112,33 @@
   });},{threshold:.5});
   document.querySelectorAll('[data-target]').forEach(function(el){cobs.observe(el);});
 
-  /* CTA Form */
+  /* CTA Form (index.html 하단) — contact.html 과 동일하게 /api/submit-email */
   var form=document.getElementById('ctaForm'),email=document.getElementById('ctaEmail'),err=document.getElementById('ctaErr'),ok=document.getElementById('ctaOk');
-  if(form)form.addEventListener('submit',function(e){e.preventDefault();var v=email.value.trim();err.classList.remove('show');ok.classList.remove('show');form.classList.remove('error');
-    if(!v||v.indexOf('@')===-1||v.indexOf('.')===-1){form.classList.add('error');err.classList.add('show');return;}
-    ok.classList.add('show');email.value='';});
+  if(form && email){
+    var ctaBtn = form.querySelector('.cta-submit');
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var v=email.value.trim();
+      err.classList.remove('show');ok.classList.remove('show');form.classList.remove('error');
+      if(!v||v.indexOf('@')===-1||v.indexOf('.')===-1){form.classList.add('error');err.classList.add('show');err.textContent='올바른 이메일 주소를 입력해 주세요.';return;}
+      var btnHtml = ctaBtn ? ctaBtn.innerHTML : '';
+      if(ctaBtn){ctaBtn.disabled=true;ctaBtn.textContent='전송 중...';}
+      fetch('/api/submit-email',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({email:v})}).then(function(res){
+        if(ctaBtn){ctaBtn.disabled=false;ctaBtn.innerHTML=btnHtml;}
+        if(res.ok){ok.classList.add('show');email.value='';}
+        else{res.text().then(function(text){
+          form.classList.add('error');
+          err.textContent='전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+          err.classList.add('show');
+        }).catch(function(){form.classList.add('error');err.classList.add('show');});}
+      }).catch(function(){
+        if(ctaBtn){ctaBtn.disabled=false;ctaBtn.innerHTML=btnHtml;}
+        form.classList.add('error');
+        err.textContent='네트워크 오류가 발생했습니다.';
+        err.classList.add('show');
+      });
+    });
+  }
 
   /* Typewriter */
   (function(){
