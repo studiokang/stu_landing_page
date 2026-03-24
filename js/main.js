@@ -80,7 +80,8 @@
       if (!src) return;
       var ov = document.createElement('div');
       ov.className = 'case-video-overlay';
-      ov.innerHTML = '<video autoplay controls playsinline><source src="' + src + '" type="video/mp4"></video><button class="overlay-close">ESC</button>';
+      var safeSrc = encodeURI(src);
+      ov.innerHTML = '<video autoplay controls playsinline><source src="' + safeSrc + '" type="video/mp4"></video><button class="overlay-close">ESC</button>';
       ov.addEventListener('click', function(ev) {
         if (ev.target === ov || ev.target.classList.contains('overlay-close')) {
           ov.querySelector('video').pause();
