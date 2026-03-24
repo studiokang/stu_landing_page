@@ -1,11 +1,9 @@
 /**
  * Vercel Serverless — 브라우저 대신 서버에서 Supabase로 INSERT (service_role)
  *
- * Vercel → 프로젝트 → Settings → Environment Variables 에 추가:
- *   SUPABASE_URL          = https://xxxx.supabase.co
- *   SUPABASE_SERVICE_ROLE_KEY = Settings → API 의 secret service_role (JWT eyJ... 형태)
- *
- * (NEXT_PUBLIC_* 와 달리 서버 전용이라 클라이언트에 노출되지 않음)
+ * Vercel Environment Variables (하나 이상 조합):
+ *   SUPABASE_URL 또는 NEXT_PUBLIC_SUPABASE_URL
+ *   SUPABASE_SERVICE_ROLE_KEY (권장) 또는 NEXT_PUBLIC_SUPABASE_ANON_KEY (anon이면 RLS insert 필요)
  */
 
 function readBodyStream(req) {
@@ -25,6 +23,7 @@ function readBodyStream(req) {
 }
 
 module.exports = async function handler(req, res) {
+  try {
   if (req.method === 'OPTIONS') {
     return res.status(204).end();
   }
@@ -33,10 +32,20 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  var baseUrl = process.env.SUPABASE_URL || '';
-  var serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+  /* URL: 전용 이름 또는 이미 넣어 둔 NEXT_PUBLIC_* */
+  var baseUrl = (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '').trim();
+  /* 키: service_role(권장) 또는 anon/publishable — RLS가 anon insert 허용이어야 함 */
+  var serviceKey = (
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.SUPABASE_ANON_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    ''
+  ).trim();
   if (!baseUrl || !serviceKey) {
-    return res.status(500).json({ error: 'Server missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY' });
+    return res.status(500).json({
+      error: 'Missing env',
+      hint: 'Vercel에 SUPABASE_URL(또는 NEXT_PUBLIC_SUPABASE_URL)과 SUPABASE_SERVICE_ROLE_KEY 또는 NEXT_PUBLIC_SUPABASE_ANON_KEY 를 설정하세요.'
+    });
   }
 
   var payload = req.body;
@@ -85,4 +94,11 @@ module.exports = async function handler(req, res) {
   }
 
   return res.status(200).json({ ok: true });
+  } catch (err) {
+    console.error('submit-email', err);
+    return res.status(500).json({
+      error: 'Internal error',
+      message: err && err.message ? String(err.message) : 'unknown'
+    });
+  }
 };
