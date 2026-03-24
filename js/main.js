@@ -235,11 +235,7 @@
     });
   }
 
-  /* Contact page: 이메일 → Supabase contact_emails 테이블 */
-  /* Supabase Dashboard → Settings → API: Project URL, Publishable(또는 anon) 키 복사 */
-  var STK_SUPABASE_URL = 'https://wjwxewehtloffnfbcovy.supabase.co';
-  var STK_SUPABASE_ANON_KEY = 'sb_publishable_pIBQzGFE1BG5sOIIAPJD4w_C54dzn5S';
-
+  /* Contact page: 이메일 → Vercel /api/submit-email → Supabase (서버에서 service_role로 저장) */
   var contactForm = document.getElementById('contactForm');
   var emailInput = document.getElementById('emailInput');
   if(contactForm && emailInput){
@@ -252,26 +248,17 @@
       var email = emailInput.value.trim();
       if(!email) return;
 
-      if(!STK_SUPABASE_ANON_KEY){
-        window.alert('js/main.js 에서 STK_SUPABASE_ANON_KEY 에 Publishable 키를 넣어 주세요. (Supabase → Settings → API)');
-        return;
-      }
-
       var btnHtml = btn ? btn.innerHTML : '';
       if(btn){
         btn.classList.add('loading');
         btn.textContent = '';
       }
 
-      var restUrl = STK_SUPABASE_URL.replace(/\/$/, '') + '/rest/v1/contact_emails';
-      fetch(restUrl, {
+      fetch('/api/submit-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
-          apikey: STK_SUPABASE_ANON_KEY,
-          Authorization: 'Bearer ' + STK_SUPABASE_ANON_KEY,
-          Prefer: 'return=minimal'
+          Accept: 'application/json'
         },
         body: JSON.stringify({ email: email })
       }).then(function(res){
@@ -288,9 +275,9 @@
             var msg = text;
             try {
               var data = JSON.parse(text);
-              msg = (data && (data.message || data.error || data.hint)) ? String(data.message || data.error || data.hint) : text;
+              msg = (data && (data.detail || data.error || data.message)) ? String(data.detail || data.error || data.message) : text;
             } catch (ignore) {}
-            window.alert('Supabase 오류 HTTP ' + res.status + '\n\n' + (msg || text).slice(0, 400));
+            window.alert('전송 실패 HTTP ' + res.status + '\n\n' + (msg || text).slice(0, 400));
           }).catch(function(){
             window.alert('전송에 실패했습니다. (HTTP ' + res.status + ')');
           });
