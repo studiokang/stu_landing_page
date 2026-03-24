@@ -43,7 +43,10 @@ foreach ($f in $files) {
   if ($LASTEXITCODE -ne 0) { throw "ffmpeg 실패: $in" }
 
   $after = (Get-Item $tmp).Length
-  Move-Item -LiteralPath $tmp -Destination $in -Force
+  # Windows에서 Move-Item 교체 시 잠금 오류 방지: 복사 후 삭제
+  Start-Sleep -Milliseconds 300
+  Copy-Item -LiteralPath $tmp -Destination $in -Force
+  Remove-Item -LiteralPath $tmp -Force
   $pct = if ($before -gt 0) { [math]::Round(100 * (1 - $after / $before), 1) } else { 0 }
   Write-Host ("OK {0,-22} {1,10:N0} -> {2,10:N0} bytes  (-{3}%)" -f $f.Name, $before, $after, $pct)
 }
