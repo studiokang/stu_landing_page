@@ -1,10 +1,17 @@
 <!DOCTYPE html>
+<!-- TODO: Admin Page
+  - 뉴스 게시물 관리 (CRUD)
+  - 포트폴리오 카드 관리
+  - 견적 문의 수신함
+  - 별도 기획 및 개발 필요
+  - 예상 경로: /admin
+-->
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>STUDIOKANG — AI 콘텐츠 제작 에이전시</title>
-<meta name="description" content="광고 영상, 숏폼, SNS 콘텐츠를 AI 기술로 더 빠르게, 더 저렴하게 제작합니다. STUDIOKANG은 기획부터 납품까지 전 과정을 직접 제작하는 AI 콘텐츠 에이전시입니다.">
+<meta name="description" content="브리핑 하나로 광고가 완성됩니다. AI-Native Creative Production — STUDIOKANG.">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -21,13 +28,13 @@
   <div class="nav-inner">
     <a href="/" class="nav-logo"><img src="assets/logo-studiokang.png" alt="STUDIOKANG"></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="/#services">Services</a></li>
-      <li><a href="projects.html">Showreel</a></li>
+      <li><a href="/#what-we-do">Services</a></li>
+      <li><a href="/#portfolio">Portfolio</a></li>
       <li><a href="/votus.html">VOTUS</a></li>
       <li><a href="/news">News</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <a href="contact.html" class="nav-cta">무료 견적 받기</a>
+    <a href="contact.html" class="nav-cta">1분 견적 받기</a>
     <button class="nav-mobile" id="navToggle" aria-label="메뉴"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -43,24 +50,23 @@
   <div class="hero-content">
     <div class="hero-inner">
       <p class="hero-label">01 / STUDIOKANG</p>
-      <h1 class="hero-headline" id="heroHeadline">
+      <p class="hero-en-sub">AI-Native Creative Production</p>
+      <h1 class="hero-headline" id="heroHeadline" style="font-weight:700;">
         <span class="typed-line" id="typedLine1"></span>
         <span class="typed-line" id="typedLine2"></span>
         <span class="type-cursor" id="typeCursor"></span>
       </h1>
-      <p class="hero-sub">
-        광고 영상, 숏폼, SNS 콘텐츠—<br>
-        AI 기술로 더 빠르게,<br>
-        더 저렴하게 제작합니다.
+      <p class="hero-sub" style="color:rgba(255,255,255,0.75);line-height:1.75;">
+        스튜디오도, 모델도, 촬영도 없이.<br>
+        브리핑 하나로 광고가 완성됩니다.<br>
+        AI가 브랜드에 필요한 모든 씬을 만들어냅니다.
       </p>
       <div class="hero-buttons">
-        <a href="projects.html" class="btn-primary">제작 사례 보기</a>
-        <a href="contact.html" class="btn-ghost">무료 견적 받기</a>
+        <a href="#portfolio" class="btn-primary">포트폴리오 보기</a>
+        <a href="contact.html" class="btn-ghost">1분 견적 받기</a>
       </div>
-      <div class="hero-tags">
-        <span class="hero-tag">광고 영상</span>
-        <span class="hero-tag">숏폼 / 릴스</span>
-        <span class="hero-tag">SNS 콘텐츠</span>
+      <div class="trust-strip" style="font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.08em;">
+        <span>CES 2026  ·  300+ Projects  ·  30+ Clients  ·  TIPS Selected</span>
       </div>
     </div>
   </div>
@@ -72,69 +78,158 @@
   <span class="glitch" style="top:45%;right:2%;">∞ BRAND.PRODUCTION.OS</span>
 </section>
 
-<!-- ════════════ 02 WHAT WE DO (SERVICES) ════════════ -->
-<section class="services section-padding" id="services">
+<!-- ════════════ 02 WHAT WE DO (CAPABILITY) ════════════ -->
+<section class="services section-padding" id="what-we-do">
   <div class="container">
     <div class="divider" style="margin-bottom:56px;"></div>
-    <p class="section-label reveal">02 / What We Do</p>
-    <h2 class="section-heading reveal reveal-d1">AI로 만드는<br>브랜드 콘텐츠</h2>
+    <p class="section-label reveal">CAPABILITY</p>
+    <h2 class="section-heading reveal reveal-d1">브랜드에 필요한 모든 콘텐츠,<br>AI가 만듭니다</h2>
     <p class="body-text reveal reveal-d2" style="max-width:520px;margin-bottom:8px;color:rgba(237,233,225,.5);font-size:14px;">기획부터 최종 납품까지,<br>AI 기술로 전 과정을 직접 제작합니다.</p>
 
-    <div class="services-grid">
+    <div class="what-we-do-grid">
+      <div class="what-we-do-row what-we-do-row--top">
       <a href="/ad-film" class="service-card card-01 reveal" style="text-decoration:none;">
         <div class="service-number">01</div>
-        <span class="service-badge">Ad Film</span>
-        <h3 class="service-title">광고 영상 제작</h3>
-        <p class="service-desc">TV CF, OOH, 디지털 광고 영상을<br>AI 버츄얼 모델로 제작합니다.<br>촬영 일정·장소 제약 없이<br>빠른 제작과 수정이 가능합니다.</p>
+        <span class="service-badge">AI BRAND AD</span>
+        <h3 class="service-title">AI 브랜드 광고</h3>
+        <p class="service-desc">촬영 없이 광고 품질의<br>이미지와 영상 제작</p>
+        <p class="service-en">Zero filming.<br>Ad-quality images &amp; video</p>
         <div class="service-tags">
-          <span class="service-tag">광고 영상</span>
-          <span class="service-tag">OOH</span>
-          <span class="service-tag">디지털 광고</span>
+          <span class="service-tag">광고영상</span>
+          <span class="service-tag">CF</span>
+          <span class="service-tag">디지털</span>
         </div>
         <hr class="service-divider">
-        <p class="service-record">MCM · Volkswagen · Coreana 제작 완료</p>
+        <p class="service-record">MCM · Dr.Sante 제작 완료</p>
       </a>
 
       <a href="/short-form" class="service-card card-02 reveal reveal-d1" style="text-decoration:none;">
         <div class="service-number">02</div>
-        <span class="service-badge">Short-form</span>
-        <h3 class="service-title">숏폼 / SNS 콘텐츠</h3>
-        <p class="service-desc">인스타그램 릴스, 유튜브 쇼츠,<br>틱톡 등 숏폼 포맷에 최적화된<br>AI 콘텐츠를 기획·제작합니다.<br>코디 추천, 제품 소개, 브랜드 캠페인.</p>
+        <span class="service-badge">AI LOOKBOOK</span>
+        <h3 class="service-title">AI 룩북</h3>
+        <p class="service-desc">제품 사진 1장 →<br>30가지 스타일 변환</p>
+        <p class="service-en">1 product photo → 30+ styles</p>
         <div class="service-tags">
-          <span class="service-tag">릴스</span>
-          <span class="service-tag">쇼츠</span>
-          <span class="service-tag">틱톡</span>
-          <span class="service-tag">SNS</span>
+          <span class="service-tag">패션</span>
+          <span class="service-tag">이커머스</span>
+          <span class="service-tag">스타일링</span>
         </div>
         <hr class="service-divider">
-        <p class="service-record">TikTok · Instagram 납품 다수</p>
+        <p class="service-record">BABATHE 제작 완료</p>
       </a>
 
       <a href="/virtual-model" class="service-card card-03 reveal reveal-d2" style="text-decoration:none;">
         <div class="service-number">03</div>
-        <span class="service-badge">Virtual Model</span>
-        <h3 class="service-title">AI 버츄얼 모델</h3>
-        <p class="service-desc">실제 모델을 대체하는<br>AI 버츄얼 모델을 직접 제작·운영합니다.<br>룩북, 착장 컷, 영상 출연까지<br>다양한 포맷으로 활용 가능합니다.</p>
+        <span class="service-badge">AI INFLUENCER</span>
+        <h3 class="service-title">AI 인플루언서</h3>
+        <p class="service-desc">브랜드 전용 버츄얼 모델.<br>스케줄·초상권 제약 없음</p>
+        <p class="service-en">Brand-exclusive virtual model</p>
         <div class="service-tags">
-          <span class="service-tag">룩북</span>
-          <span class="service-tag">착장 컷</span>
-          <span class="service-tag">영상 출연</span>
+          <span class="service-tag">SNS</span>
+          <span class="service-tag">캠페인</span>
+          <span class="service-tag">전속모델</span>
         </div>
         <hr class="service-divider">
-        <p class="service-record">15명+ 전속 모델 · VOTUS 매거진 발행</p>
+        <p class="service-record">15명+ 전속 운영 중</p>
       </a>
+      </div>
+
+      <div class="what-we-do-row what-we-do-row--bottom">
+      <a href="/votus.html" class="service-card card-04 reveal reveal-d3" style="text-decoration:none;">
+        <div class="service-number">04</div>
+        <span class="service-badge">AI MAGAZINE</span>
+        <h3 class="service-title">AI 매거진</h3>
+        <p class="service-desc">에디토리얼 기획부터<br>이미지 제작까지 일괄</p>
+        <p class="service-en">Editorial planning to<br>image production</p>
+        <div class="service-tags">
+          <span class="service-tag">VOTUS</span>
+          <span class="service-tag">에디토리얼</span>
+        </div>
+        <hr class="service-divider">
+        <p class="service-record">Vol.4 발행 중</p>
+      </a>
+
+      <a href="contact.html" class="service-card card-05 reveal reveal-d4" style="text-decoration:none;">
+        <div class="service-number">05</div>
+        <span class="service-badge">CUSTOM</span>
+        <h3 class="service-title">AI 커스텀 콘텐츠</h3>
+        <p class="service-desc">브랜드 상황에 맞게<br>설계합니다</p>
+        <p class="service-en">Tailored to your brand</p>
+        <div class="service-tags">
+          <span class="service-tag">맞춤제작</span>
+          <span class="service-tag">기획</span>
+        </div>
+        <hr class="service-divider">
+        <p class="service-record">문의하기 →</p>
+      </a>
+      </div>
     </div>
   </div>
   <img src="assets/3D_1.png" class="deco-single" alt="" aria-hidden="true">
   <span class="glitch" style="top:8%;right:2%;">◈ SERVICE.CATALOG</span>
 </section>
 
-<!-- ════════════ 03 CASE STUDIES — 9:16 Short-form Cards ════════════ -->
-<section class="case-section section-padding" id="showreel">
+<!-- ════════════ BEFORE / AFTER ════════════ -->
+<section id="before-after" class="ba-section">
+  <div class="sec-wrap">
+    <div class="ba-layout reveal">
+
+      <div class="ba-left">
+        <div class="sec-label">HOW IT WORKS</div>
+
+        <p class="ba-en-sub">AI creates every scene<br>your brand needs</p>
+
+        <h2 class="ba-title">
+          브랜드에 필요한<br>
+          모든 씬을 <span class="lime">AI가</span><br>
+          만듭니다
+        </h2>
+
+        <p class="ba-desc">
+          브리핑 하나면 충분합니다.<br>
+          스튜디오도, 모델도, 촬영도 없이<br>
+          원하는 모든 장면을 만들어냅니다.
+        </p>
+
+        <div class="ba-tabs" role="tablist" aria-label="Before / After 케이스">
+          <button type="button" class="ba-tab active" data-case="0" role="tab" aria-selected="true">제품 광고</button>
+          <button type="button" class="ba-tab" data-case="1" role="tab" aria-selected="false">패션 룩북</button>
+          <button type="button" class="ba-tab" data-case="2" role="tab" aria-selected="false">라이프스타일</button>
+        </div>
+      </div>
+
+      <div class="ba-right">
+        <div class="ba-images">
+          <div class="ba-img-col">
+            <div class="ba-img-label">BEFORE</div>
+            <div class="ba-img-wrap before-wrap">
+              <img id="ba-before-img" src="img/ba/before-product.png" alt="Before">
+            </div>
+          </div>
+          <div class="ba-arrow-col" aria-hidden="true">
+            <span class="ba-arrow">→</span>
+          </div>
+          <div class="ba-img-col">
+            <div class="ba-img-label">AFTER</div>
+            <div class="ba-img-wrap after-wrap">
+              <img id="ba-after-img" src="img/ba/after-product2.png" alt="After">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ PORTFOLIO + STATS ════════════ -->
+<section class="portfolio-block" id="portfolio">
+  <!-- TODO: 하위 페이지에서 16:9 영상 노출 방식 검토 필요. 현재는 세로형 썸네일 유지 -->
+  <div class="case-section section-padding portfolio-cases-inner">
   <div class="container">
     <div class="divider--lime" style="margin-bottom:40px;"></div>
-    <p class="section-label reveal" style="color:rgba(200,255,0,.7);">Showreel</p>
-    <h2 class="section-heading reveal reveal-d1">기존 방식 vs<br><span style="color:var(--color-accent-lime);">AI 제작</span></h2>
+    <p class="section-label reveal" style="color:rgba(200,255,0,.7);">PORTFOLIO</p>
+    <h2 class="section-heading reveal reveal-d1">직접 제작한<br><span style="color:var(--color-accent-lime);">AI 콘텐츠</span></h2>
     <p class="body-text reveal reveal-d2" style="max-width:480px;margin-bottom:8px;color:rgba(237,233,225,.5);font-size:14px;">같은 결과물, 완전히 다른 과정.<br>AI가 바꾸는 콘텐츠 제작의 모든 것.</p>
 
     <div class="cases-strip reveal reveal-d3">
@@ -308,13 +403,100 @@
       <span class="more-cta">전체 프로젝트 보기 →</span>
     </a>
   </div>
+  </div>
+
+  <section class="numbers-section numbers-section--in-portfolio" id="stats">
+  <div class="numbers-inner">
+
+    <div class="numbers-left reveal">
+      <div class="sec-label">TRUST US</div>
+      <h2 class="numbers-title">숫자로 증명하는<br><span class="lime">AI 콘텐츠</span></h2>
+      <p class="numbers-sub">스튜디오캉이 지금까지<br>만들어온 실제 성과입니다.</p>
+    </div>
+
+    <div class="numbers-grid">
+      <div class="num-block reveal">
+        <div class="num-val" data-target="300" data-suffix="+">0+</div>
+        <div class="num-rule"></div>
+        <div class="num-label">Cumulative Projects</div>
+        <div class="num-sub">누적 프로젝트</div>
+      </div>
+
+      <div class="num-block reveal reveal-d1">
+        <div class="num-val" data-target="30" data-suffix="+">0+</div>
+        <div class="num-rule"></div>
+        <div class="num-label">Clients</div>
+        <div class="num-sub">협업 브랜드</div>
+      </div>
+
+      <div class="num-block reveal reveal-d2">
+        <div class="num-val num-val--static">CES 2026</div>
+        <div class="num-rule"></div>
+        <div class="num-label">Global Stage</div>
+        <div class="num-sub">글로벌 무대</div>
+      </div>
+
+      <div class="num-block highlight reveal reveal-d3">
+        <div class="num-val num-val--static">TIPS</div>
+        <div class="num-rule lime-rule"></div>
+        <div class="num-label">TIPS Selected</div>
+        <div class="num-sub">기술창업 지원 선정</div>
+      </div>
+    </div>
+
+  </div>
+  </section>
 </section>
 
-<!-- ════════════ 04 HOW WE WORK (PROCESS) ════════════ -->
-<section class="process section-padding marble-vein" id="process">
+<!-- ════════════ CLIENTS ════════════ -->
+<section class="trust section-padding" id="clients">
+  <div class="container">
+    <p class="section-label reveal" style="text-align:center;">Clients</p>
+    <h2 class="section-heading reveal reveal-d1" style="text-align:center;">함께한 브랜드</h2>
+    <div class="trust-marquee-wrap reveal reveal-d2">
+      <div class="trust-marquee">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/5df4ca3ee1360.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/05617eb200816.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/3e3f431d9e012.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/72f783846bb6a.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/47a6a03d8a3b1.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/8c0b68eb6b78b.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/91977ef8ced2c.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/12ebfeb269469.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/69caca8f56c51.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/bea550104b539.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/f53d9c4c6c464.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/28cc723ad364d.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/6f5120a9c4d21.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/f19d3c20b404c.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/800cb3e63d821.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/607dedd768354.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/5df4ca3ee1360.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/05617eb200816.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/3e3f431d9e012.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/72f783846bb6a.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/47a6a03d8a3b1.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/8c0b68eb6b78b.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/91977ef8ced2c.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/12ebfeb269469.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/69caca8f56c51.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/bea550104b539.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/f53d9c4c6c464.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/28cc723ad364d.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/6f5120a9c4d21.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/f19d3c20b404c.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/800cb3e63d821.png" alt="Partner" loading="lazy">
+        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/607dedd768354.png" alt="Partner" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ HOW WE WORK ════════════ -->
+<section class="process section-padding marble-vein" id="how-we-work">
   <div class="container">
     <div class="divider--dashed" style="margin-bottom:56px;"></div>
-    <p class="section-label reveal">03 / How We Work</p>
+    <p class="section-label reveal">How We Work</p>
     <h2 class="section-heading reveal reveal-d1">기획부터 납품까지<br>4단계로 완성됩니다.</h2>
 
     <div class="process-steps">
@@ -375,116 +557,42 @@
   </div>
 </section>
 
-<!-- ════════════ 05 NEWS ════════════ -->
-<section class="news section-padding" id="news">
-  <div class="container">
-    <div class="divider" style="margin-bottom:56px;"></div>
-    <p class="section-label reveal">04 / News</p>
-    <h2 class="section-heading reveal reveal-d1">STUDI<svg width="14" height="14" viewBox="0 0 14 14" style="display:inline-block;vertical-align:middle;margin:0 1px;position:relative;top:-2px;"><defs><radialGradient id="moon"><stop offset="0%" stop-color="#fff"/><stop offset="45%" stop-color="#c8c8d8"/><stop offset="100%" stop-color="#404060"/></radialGradient></defs><circle cx="7" cy="7" r="6.5" fill="url(#moon)" filter="drop-shadow(0 0 4px rgba(255,255,255,0.3))"/></svg>KANG 새로운 소식을<br><span class="lime">전달합니다.</span></h2>
-    <p class="body-text reveal reveal-d2" style="max-width:520px;margin-bottom:8px;color:rgba(237,233,225,.5);font-size:14px;">AI 버츄얼 모델 산업의 최신 뉴스와 스튜디오캉의 협업 소식을 전합니다.</p>
-
-    <div class="news-grid">
-      <div class="news-card reveal">
-        <div class="news-img">
-          <img src="https://cdn.imweb.me/thumbnail/20250112/50c414439505e.png" alt="STUDIOKANG × NUDIC 협업" loading="lazy">
-          <span class="news-badge">Partnership</span>
-        </div>
-        <div class="news-info">
-          <p class="news-client-tag">STUDIOKANG × NUDIC</p>
-          <h3 class="news-title">은퇴자 1,000만명 시대, 차세대 AI 간병 매칭 플랫폼 떴다</h3>
-          <p class="news-desc">스튜디오캉·뉴딕 전략적 협약으로 요양자와 간병인 실시간 매칭, 복지 의료서비스를 AI로 통합 관리합니다.</p>
-        </div>
-        <div class="news-bottom">
-          <span class="news-date">2025.01.03</span>
-          <a href="https://www.mk.co.kr/news/society/11208834" target="_blank" rel="noopener" class="news-more">더 보기 →</a>
-        </div>
+<!-- ════════════ AI INFLUENCER — Explore grid ════════════ -->
+<section class="influencer-section" id="ai-influencer">
+  <div class="sec-wrap">
+    <div class="ai-influencer-header reveal">
+      <div class="ai-influencer-copy">
+        <p class="sec-label">AI INFLUENCER</p>
+        <h2 class="ai-influencer-heading">
+          <span>브랜드를 위한</span>
+          <span class="ai-influencer-heading-lime">AI 인플루언서</span>
+        </h2>
+        <p class="ai-influencer-subcopy">
+          스케줄·초상권·컨디션 제약 없는 브랜드 전용 AI 모델.<br>
+          하나의 캐릭터로 SNS 운영부터 광고 캠페인까지.
+        </p>
       </div>
-
-      <div class="news-card reveal reveal-d1">
-        <div class="news-img">
-          <img src="https://cdn.imweb.me/thumbnail/20250112/0c32b1e794922.png" alt="STUDIOKANG × 300FEET 협업" loading="lazy">
-          <span class="news-badge">Collaboration</span>
-        </div>
-        <div class="news-info">
-          <p class="news-client-tag">STUDIOKANG × 300FEET</p>
-          <h3 class="news-title">만화 '공포의 외인구단' 설까치가 디지털 세계로 돌아온다</h3>
-          <p class="news-desc">스튜디오캉·300피트 전략적 제휴로 공포의 외인구단, 슈퍼레이스 NFT 등 디지털 콘텐츠로 재탄생합니다.</p>
-        </div>
-        <div class="news-bottom">
-          <span class="news-date">2024.12.19</span>
-          <a href="https://www.mk.co.kr/news/society/11198488" target="_blank" rel="noopener" class="news-more">더 보기 →</a>
-        </div>
-      </div>
-
-      <div class="news-card reveal reveal-d2">
-        <div class="news-img">
-          <img src="https://cdn.imweb.me/thumbnail/20250112/32555f4077cc2.png" alt="STUDIOKANG × TDMETA 캠페인" loading="lazy">
-          <span class="news-badge">Campaign</span>
-        </div>
-        <div class="news-info">
-          <p class="news-client-tag">STUDIOKANG × TDMETA</p>
-          <h3 class="news-title">'AI 레이싱 엠버서더', 팬이 직접 투표로 뽑는다고?</h3>
-          <p class="news-desc">TDT 챔피언십 운영 TDMETA 특별이벤트, AI 기술과 팬 참여 결합한 1기 선발대회. TDT 챔피언십 메인 레이싱 모델로 활동.</p>
-        </div>
-        <div class="news-bottom">
-          <span class="news-date">2024.12.06</span>
-          <a href="https://biz.heraldcorp.com/article/10009727" target="_blank" rel="noopener" class="news-more">더 보기 →</a>
-        </div>
-      </div>
+      <a href="#" class="ai-influencer-lineup-link">전체 라인업 보기 →</a>
     </div>
 
-    <div style="text-align:center;" class="reveal">
-      <a href="/news" class="news-more-btn">더 많은 소식 보기</a>
-    </div>
-  </div>
-  <span class="glitch" style="top:10%;right:3%;">◈ NEWS.FEED</span>
-</section>
-
-<!-- ════════════ 05 NUMBERS ════════════ -->
-<section class="numbers-section" id="stats">
-  <div class="numbers-inner">
-
-    <div class="numbers-left reveal">
-      <div class="sec-label">05 / NUMBERS</div>
-      <h2 class="numbers-title">숫자로 증명하는<br><span class="lime">AI 콘텐츠</span></h2>
-      <p class="numbers-sub">스튜디오캉이 지금까지<br>만들어온 실제 성과입니다.</p>
-    </div>
-
-    <div class="numbers-grid">
-      <div class="num-block reveal">
-        <div class="num-val" data-target="50" data-suffix="건+">0건+</div>
-        <div class="num-rule"></div>
-        <div class="num-label">AI 콘텐츠 제작</div>
-        <div class="num-sub">광고 영상·숏폼·SNS 포함</div>
+    <div class="explore-grid reveal reveal-d1" aria-label="AI 인플루언서 갤러리">
+      <div class="g-cell feat">
+        <img class="cell-img" src="./img/influencer/influencer-feat.png" alt="" loading="lazy" width="800" height="1200" decoding="async">
       </div>
-
-      <div class="num-block reveal reveal-d1">
-        <div class="num-val" data-target="5" data-suffix="만+">0만+</div>
-        <div class="num-rule"></div>
-        <div class="num-label">누적 팔로워 도달</div>
-        <div class="num-sub">전 플랫폼 합산</div>
-      </div>
-
-      <div class="num-block reveal reveal-d2">
-        <div class="num-val" data-target="30" data-suffix="사+">0사+</div>
-        <div class="num-rule"></div>
-        <div class="num-label">협업 브랜드</div>
-        <div class="num-sub">국내·글로벌 브랜드</div>
-      </div>
-
-      <div class="num-block highlight reveal reveal-d3">
-        <div class="num-val" data-target="7" data-suffix="일">0일</div>
-        <div class="num-rule lime-rule"></div>
-        <div class="num-label">평균 제작 기간</div>
-        <div class="num-sub">기획→납품 전 과정 AVG.</div>
-      </div>
+      <div class="g-cell"><img class="cell-img" src="./img/influencer/influencer-01.png" alt="" loading="lazy" width="800" height="800" decoding="async"></div>
+      <div class="g-cell"><img class="cell-img" src="./img/influencer/influencer-02.png" alt="" loading="lazy" width="800" height="800" decoding="async"></div>
+      <div class="g-cell"><img class="cell-img" src="./img/influencer/influencer-03.png" alt="" loading="lazy" width="800" height="800" decoding="async"></div>
+      <div class="g-cell"><img class="cell-img" src="./img/influencer/influencer-04.png" alt="" loading="lazy" width="800" height="800" decoding="async"></div>
+      <div class="g-cell"><img class="cell-img" src="./img/influencer/influencer-05.png" alt="" loading="lazy" width="800" height="800" decoding="async"></div>
+      <div class="g-cell"><img class="cell-img" src="./img/influencer/influencer-06.png" alt="" loading="lazy" width="800" height="800" decoding="async"></div>
+      <div class="g-cell"><img class="cell-img" src="./img/influencer/influencer-07.png" alt="" loading="lazy" width="800" height="800" decoding="async"></div>
     </div>
 
   </div>
 </section>
 
 <!-- ════════════ VOTUS ════════════ -->
-<section class="votus-section">
+<section class="votus-section" id="votus">
   <div class="sec-wrap">
 
     <div class="votus-left reveal">
@@ -515,7 +623,7 @@
 
       <div class="votus-ctas">
         <a href="https://online.fliphtml5.com/votusai/svfr/#p=1" target="_blank" class="btn-votus-primary">매거진 보기 →</a>
-        <a href="contact.html" class="btn-votus-ghost">브랜드 협업 문의</a>
+        <a href="contact.html?type=collaboration" class="btn-votus-ghost">브랜드 협업 문의</a>
       </div>
     </div>
 
@@ -553,198 +661,80 @@
   </div>
 </section>
 
-<!-- ════════════ 07 PRICING ════════════ -->
-<section class="pricing section-padding" id="pricing">
+<!-- ════════════ NEWS ════════════ -->
+<section class="news section-padding" id="news">
   <div class="container">
-    <div class="divider--dashed" style="margin-bottom:56px;"></div>
-    <p class="section-label reveal">06 / Pricing</p>
-    <h2 class="section-heading reveal reveal-d1">명확한 가격, 투명한 견적</h2>
+    <div class="divider" style="margin-bottom:56px;"></div>
+    <p class="section-label reveal">News</p>
+    <h2 class="section-heading reveal reveal-d1">STUDIO<svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" style="display:inline-block;vertical-align:middle;margin:0 1px;position:relative;top:-2px;"><defs><radialGradient id="moonNewsGrad"><stop offset="0%" stop-color="#fff"/><stop offset="45%" stop-color="#c8c8d8"/><stop offset="100%" stop-color="#404060"/></radialGradient></defs><circle cx="7" cy="7" r="6.5" fill="url(#moonNewsGrad)" filter="drop-shadow(0 0 4px rgba(255,255,255,0.3))"/></svg>KANG 새로운 소식을<br><span class="lime">전달합니다.</span></h2>
+    <p class="body-text reveal reveal-d2" style="max-width:520px;margin-bottom:8px;color:rgba(237,233,225,.5);font-size:14px;">AI 버츄얼 모델 산업의 최신 뉴스와 스튜디오캉의 협업 소식을 전합니다.</p>
 
-    <div class="pricing-grid">
-      <div class="pricing-card reveal">
-        <p class="pricing-tier">Starter</p>
-        <p class="pricing-name">SNS 콘텐츠 패키지</p>
-        <p class="pricing-desc">버츄얼 모델 1인<br>이미지 10장</p>
-        <a href="contact.html" class="pricing-cta">견적 문의</a>
+    <div class="news-grid">
+      <div class="news-card reveal">
+        <div class="news-img">
+          <img src="https://cdn.imweb.me/thumbnail/20250112/50c414439505e.png" alt="STUDIOKANG × NUDIC 협업" loading="lazy">
+        </div>
+        <div class="news-info">
+          <p class="news-client-tag">STUDIOKANG × NUDIC</p>
+          <h3 class="news-title">은퇴자 1,000만명 시대, 차세대 AI 간병 매칭 플랫폼 떴다</h3>
+          <p class="news-desc">스튜디오캉·뉴딕 전략적 협약으로 요양자와 간병인 실시간 매칭, 복지 의료서비스를 AI로 통합 관리합니다.</p>
+        </div>
+        <div class="news-bottom">
+          <span class="news-date">2025.01.03</span>
+          <a href="https://www.mk.co.kr/news/society/11208834" target="_blank" rel="noopener" class="news-more">더 보기 →</a>
+        </div>
       </div>
-      <div class="pricing-card featured reveal reveal-d1">
-        <p class="pricing-tier">Standard</p>
-        <p class="pricing-name">광고 영상 패키지</p>
-        <p class="pricing-desc">버츄얼 모델 1인<br>15~30초 영상</p>
-        <a href="contact.html" class="pricing-cta">견적 문의</a>
+
+      <div class="news-card reveal reveal-d1">
+        <div class="news-img">
+          <img src="https://cdn.imweb.me/thumbnail/20250112/0c32b1e794922.png" alt="STUDIOKANG × 300FEET 협업" loading="lazy">
+        </div>
+        <div class="news-info">
+          <p class="news-client-tag">STUDIOKANG × 300FEET</p>
+          <h3 class="news-title">만화 '공포의 외인구단' 설까치가 디지털 세계로 돌아온다</h3>
+          <p class="news-desc">스튜디오캉·300피트 전략적 제휴로 공포의 외인구단, 슈퍼레이스 NFT 등 디지털 콘텐츠로 재탄생합니다.</p>
+        </div>
+        <div class="news-bottom">
+          <span class="news-date">2024.12.19</span>
+          <a href="https://www.mk.co.kr/news/society/11198488" target="_blank" rel="noopener" class="news-more">더 보기 →</a>
+        </div>
       </div>
-      <div class="pricing-card reveal reveal-d2">
-        <p class="pricing-tier">Enterprise</p>
-        <p class="pricing-name">커스텀 프로젝트</p>
-        <p class="pricing-desc">전용 모델 개발<br>장기 캠페인</p>
-        <a href="contact.html" class="pricing-cta">전담 상담 받기</a>
+
+      <div class="news-card reveal reveal-d2">
+        <div class="news-img">
+          <img src="https://cdn.imweb.me/thumbnail/20250112/32555f4077cc2.png" alt="STUDIOKANG × TDMETA 캠페인" loading="lazy">
+        </div>
+        <div class="news-info">
+          <p class="news-client-tag">STUDIOKANG × TDMETA</p>
+          <h3 class="news-title">'AI 레이싱 엠버서더', 팬이 직접 투표로 뽑는다고?</h3>
+          <p class="news-desc">TDT 챔피언십 운영 TDMETA 특별이벤트, AI 기술과 팬 참여 결합한 1기 선발대회. TDT 챔피언십 메인 레이싱 모델로 활동.</p>
+        </div>
+        <div class="news-bottom">
+          <span class="news-date">2024.12.06</span>
+          <a href="https://biz.heraldcorp.com/article/10009727" target="_blank" rel="noopener" class="news-more">더 보기 →</a>
+        </div>
       </div>
     </div>
-    <p class="pricing-note reveal">정확한 금액은 프로젝트 규모에 따라 달라집니다.<br>무료 상담을 통해 맞춤 견적을 받아보세요.</p>
-  </div>
-</section>
 
-<!-- ════════════ 08 CLIENTS ════════════ -->
-<section class="trust section-padding" id="trust">
-  <div class="container">
-    <p class="section-label reveal" style="text-align:center;">07 / Clients</p>
-    <h2 class="section-heading reveal reveal-d1" style="text-align:center;">함께한 브랜드</h2>
-    <div class="trust-marquee-wrap reveal reveal-d2">
-      <div class="trust-marquee">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/5df4ca3ee1360.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/05617eb200816.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/3e3f431d9e012.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/72f783846bb6a.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/47a6a03d8a3b1.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/8c0b68eb6b78b.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/91977ef8ced2c.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/12ebfeb269469.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/69caca8f56c51.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/bea550104b539.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/f53d9c4c6c464.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/28cc723ad364d.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/6f5120a9c4d21.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/f19d3c20b404c.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/800cb3e63d821.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/607dedd768354.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/5df4ca3ee1360.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/05617eb200816.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/3e3f431d9e012.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/72f783846bb6a.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/47a6a03d8a3b1.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/8c0b68eb6b78b.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/91977ef8ced2c.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/12ebfeb269469.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/69caca8f56c51.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/bea550104b539.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/f53d9c4c6c464.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/28cc723ad364d.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/6f5120a9c4d21.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/f19d3c20b404c.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/800cb3e63d821.png" alt="Partner" loading="lazy">
-        <img class="trust-logo" src="https://cdn.imweb.me/upload/S20240528931d4d9f455dc/607dedd768354.png" alt="Partner" loading="lazy">
-      </div>
+    <div style="text-align:center;" class="reveal">
+      <a href="/news" class="news-more-btn">더 많은 소식 보기</a>
     </div>
   </div>
+  <span class="glitch" style="top:10%;right:3%;">◈ NEWS.FEED</span>
 </section>
 
-<!-- ════════════ 09 AI INFLUENCER ════════════ -->
-<section class="influencer-section" id="models">
-  <div class="sec-wrap">
-
-    <div class="inf-header reveal">
-      <div class="inf-header-left">
-        <div class="sec-label">AI INFLUENCER</div>
-        <h2>브랜드를 위한<br><span class="lime">AI 인플루언서</span></h2>
-        <p class="inf-sub">SNS 팔로워를 보유한 전속 AI 인플루언서.<br>촬영 없이 365일 콘텐츠를 운영합니다.</p>
-      </div>
-      <div class="inf-header-right">
-        <a href="/virtual-model" class="inf-link">전체 라인업 보기 →</a>
-      </div>
-    </div>
-
-    <div class="inf-strip reveal reveal-d1">
-      <div class="inf-card">
-        <div class="inf-photo">
-          <img src="assets/model-hari.png" alt="강하리" loading="lazy" style="object-position: center 15%" onerror="this.style.display='none'">
-          <div class="inf-badge">
-            <span class="badge-platform">IG</span>
-            <span class="badge-count">1.2만</span>
-          </div>
-        </div>
-        <div class="inf-info">
-          <div class="inf-name">강하리</div>
-          <div class="inf-en">HARI KANG</div>
-          <div class="inf-keyword">뷰티 · 패션</div>
-        </div>
-      </div>
-
-      <div class="inf-card">
-        <div class="inf-photo">
-          <img src="assets/model-haneul.png" alt="강하늘" loading="lazy" style="object-position: center 10%" onerror="this.style.display='none'">
-          <div class="inf-badge">
-            <span class="badge-platform">IG</span>
-            <span class="badge-count">8천</span>
-          </div>
-        </div>
-        <div class="inf-info">
-          <div class="inf-name">강하늘</div>
-          <div class="inf-en">HANEUL KANG</div>
-          <div class="inf-keyword">캐주얼 · 라이프</div>
-        </div>
-      </div>
-
-      <div class="inf-card">
-        <div class="inf-photo">
-          <img src="assets/model-lucas.png" alt="루카스" loading="lazy" style="object-position: center 10%" onerror="this.style.display='none'">
-          <div class="inf-badge">
-            <span class="badge-platform">IG</span>
-            <span class="badge-count">6천</span>
-          </div>
-        </div>
-        <div class="inf-info">
-          <div class="inf-name">루카스</div>
-          <div class="inf-en">LUCAS</div>
-          <div class="inf-keyword">스포츠 · 패션</div>
-        </div>
-      </div>
-
-      <div class="inf-card">
-        <div class="inf-photo">
-          <img src="assets/model-hana.png" alt="유하나" loading="lazy" style="object-position: center 20%" onerror="this.style.display='none'">
-          <div class="inf-badge">
-            <span class="badge-platform">IG</span>
-            <span class="badge-count">5천</span>
-          </div>
-        </div>
-        <div class="inf-info">
-          <div class="inf-name">유하나</div>
-          <div class="inf-en">HANA YOO</div>
-          <div class="inf-keyword">엘레강스 · 럭셔리</div>
-        </div>
-      </div>
-
-      <div class="inf-card">
-        <div class="inf-photo">
-          <img src="assets/model-seohee.png" alt="윤서희" loading="lazy" style="object-position: center 15%" onerror="this.style.display='none'">
-          <div class="inf-badge">
-            <span class="badge-platform">IG</span>
-            <span class="badge-count">4천</span>
-          </div>
-        </div>
-        <div class="inf-info">
-          <div class="inf-name">윤서희</div>
-          <div class="inf-en">SEOHEE YUN</div>
-          <div class="inf-keyword">트렌디 · 컬러풀</div>
-        </div>
-      </div>
-
-      <div class="inf-card inf-more">
-        <div class="inf-photo inf-more-ph">
-          <span class="more-num">+10</span>
-          <span class="more-text">더 보기</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ════════════ 10 CTA ════════════ -->
-<section class="cta-section" id="contact">
+<!-- ════════════ CTA ════════════ -->
+<section class="cta-section" id="cta">
   <div class="cta-nebula"></div>
   <div class="container">
     <div class="cta-content reveal">
-      <p class="section-label">09 / Contact</p>
-      <h2 class="section-heading">지금 바로<br>무료 견적 <span style="color:var(--color-accent-lime);">받기</span></h2>
-      <p class="cta-desc">무료 상담 · 24시간 이내 회신</p>
-      <form class="cta-form" id="ctaForm" novalidate>
-        <input type="email" class="cta-input" id="ctaEmail" placeholder="your@email.com" required>
-        <button type="submit" class="cta-submit">무료 견적 받기</button>
-      </form>
-      <p class="cta-msg err" id="ctaErr">올바른 이메일 주소를 입력해 주세요.</p>
-      <p class="cta-msg ok" id="ctaOk">감사합니다! 빠르게 회신 드리겠습니다.</p>
-      <p class="cta-privacy">* 입력하신 이메일은 견적 안내 목적으로만 사용되며, 제3자에게 제공되지 않습니다.<br>개인정보는 마케팅에 사용되지 않습니다.</p>
+      <p class="section-label">Contact</p>
+      <h2 class="section-heading">다음 프로젝트를<br><span style="color:var(--color-accent-lime);">시작해 보세요</span></h2>
+      <p class="cta-desc">Get a 1-Minute Quote · View More Work</p>
+      <div class="cta-split">
+        <a href="contact.html?type=estimate" class="cta-btn cta-btn-primary">1분 견적 받기 →</a>
+        <a href="contact.html?type=collaboration" class="cta-btn cta-btn-ghost">협업 문의하기</a>
+      </div>
     </div>
   </div>
   <span class="glitch" style="bottom:12%;right:4%;">[QUANTUM.LINK]</span>
@@ -757,7 +747,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-logo"><img src="assets/logo-studiokang.png" alt="STUDIOKANG"></div>
-        <p class="footer-tagline">AI 콘텐츠 제작 에이전시.<br>No More Impossible, Only Possible.</p>
+        <p class="footer-tagline">AI 콘텐츠 제작 에이전시.<br>No More Impossible, Just Possible.</p>
       </div>
       <div class="footer-col">
         <h4>서비스</h4>
@@ -773,7 +763,7 @@
       </div>
       <div class="footer-col">
         <h4>주소</h4>
-        <p>경기도 수원시 영통구<br>경기대학교 창업보육센터<br>507~8호</p>
+        <p>경기도 수원시 영통구 광교산로 154-42<br>경기대학교 창업보육센터 N동 N호</p>
       </div>
     </div>
     <div class="footer-bottom">

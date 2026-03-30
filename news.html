@@ -20,13 +20,13 @@
   <div class="nav-inner">
     <a href="/" class="nav-logo"><img src="assets/logo-studiokang.png" alt="STUDIOKANG"></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="/#services">Services</a></li>
-      <li><a href="projects.html">Showreel</a></li>
+      <li><a href="/#what-we-do">Services</a></li>
+      <li><a href="/#portfolio">Portfolio</a></li>
       <li><a href="/votus.html">VOTUS</a></li>
       <li><a href="news.html" class="nav-link-active">News</a></li>
-      <li><a href="/contact">Contact</a></li>
+      <li><a href="contact.html">Contact</a></li>
     </ul>
-    <a href="/contact" class="nav-cta">무료 견적 받기</a>
+    <a href="contact.html" class="nav-cta">1분 견적 받기</a>
     <button class="nav-mobile" id="navToggle" aria-label="메뉴"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -36,7 +36,7 @@
     <a href="/">홈</a><span aria-hidden="true">&gt;</span><span>News</span>
   </nav>
 
-  <section class="news-page-hero" aria-labelledby="news-hero-heading">
+  <section class="news-page-hero news-hero" aria-labelledby="news-hero-heading">
     <div class="news-page-hero-inner">
       <div class="news-page-hero-left">
         <p class="news-sec-label">NEWS</p>
@@ -46,18 +46,11 @@
     </div>
   </section>
 
-  <div class="news-filter-bar">
-    <div class="filter-tabs" role="tablist" aria-label="뉴스 카테고리">
-      <button type="button" class="tab active" role="tab" aria-selected="true" data-filter="all">전체</button>
-      <button type="button" class="tab" role="tab" aria-selected="false" data-filter="partnership">PARTNERSHIP</button>
-      <button type="button" class="tab" role="tab" aria-selected="false" data-filter="collaboration">COLLABORATION</button>
-      <button type="button" class="tab" role="tab" aria-selected="false" data-filter="campaign">CAMPAIGN</button>
+  <section class="news-page-content news-page-news" id="newsPageContent">
+    <div class="container">
+      <div class="news-grid news-grid--paged" id="newsGrid"></div>
+      <nav class="pagination" id="pagination" aria-label="뉴스 페이지"></nav>
     </div>
-  </div>
-
-  <section class="news-page-content" id="newsPageContent">
-    <article class="news-featured" id="newsFeatured" data-cat="partnership"></article>
-    <div class="news-grid" id="newsGrid"></div>
   </section>
 
   <section class="cta-section" id="contact">
@@ -86,7 +79,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-logo"><img src="assets/logo-studiokang.png" alt="STUDIOKANG"></div>
-        <p class="footer-tagline">AI 콘텐츠 제작 에이전시.<br>No More Impossible, Only Possible.</p>
+        <p class="footer-tagline">AI 콘텐츠 제작 에이전시.<br>No More Impossible, Just Possible.</p>
       </div>
       <div class="footer-col">
         <h4>서비스</h4>
@@ -102,7 +95,7 @@
       </div>
       <div class="footer-col">
         <h4>주소</h4>
-        <p>경기도 수원시 영통구<br>경기대학교 창업보육센터<br>507~8호</p>
+        <p>경기도 수원시 영통구 광교산로 154-42<br>경기대학교 창업보육센터 N동 N호</p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -114,130 +107,371 @@
 
 <script>
 (function () {
-  const BADGE_CLASS = {
-    partnership: 'badge-partnership',
-    collaboration: 'badge-collaboration',
-    campaign: 'badge-campaign'
+  var IMG_ONERR = "this.onerror=null;this.src='./img/news-fallback.jpg';";
+
+  var NEWS_PAGES = {
+    1: [
+      {
+        partner: 'promlabs',
+        title: '프롬랩스, 중기부 TIPS 최종 선정',
+        desc: '중소벤처기업부 기술창업 지원사업 TIPS 최종 선정에 프롬랩스가 이름을 올렸습니다.',
+        date: '2025.12.02',
+        img: './img/news-promlab-tips.png',
+        href: 'https://www.etnews.com/20251202000229',
+        target: '_blank',
+        alt: '프롬랩스 TIPS'
+      },
+      {
+        partner: 'promlabs',
+        title: "프롬랩스, '명령어'를 넘어 '맥락'을 설계하다",
+        desc: '명령어 중심에서 맥락 중심으로, 프롬프트 엔지니어링의 새 지평을 제시합니다.',
+        date: '2026.01.27',
+        img: './img/news-promlab-context.png',
+        href: 'https://www.mk.co.kr/news/business/11944523',
+        target: '_blank',
+        alt: '프롬랩스 매일경제'
+      },
+      {
+        partner: 'promlabs',
+        title: "프롬랩스, 세계 최대 IT 전시\nCES 2026에서 'Promptly' 선봬",
+        desc: '글로벌 무대에서 AI 프롬프트 번역기 Promptly를 공개합니다.',
+        date: '2025.12.04',
+        img: './img/news-promptly-ces.png',
+        href: 'https://www.news1.kr/industry/general-industry/5998130',
+        target: '_blank',
+        alt: 'CES 2026 Promptly'
+      },
+      {
+        partner: 'STUDIOKANG × NUDIC',
+        title: '은퇴자 1,000만명 시대,\n차세대 AI 간병 매칭 플랫폼 됐다',
+        desc: '요양자와 간병인을 실시간으로 연결하는 차세대 AI 매칭 서비스로 주목받고 있습니다.',
+        date: '2025.01.03',
+        img: 'https://cdn.imweb.me/thumbnail/20250112/50c414439505e.png',
+        href: 'https://www.obsnews.co.kr/news/articleView.html?idxno=1497648',
+        target: '_blank',
+        alt: 'STUDIOKANG NUDIC'
+      },
+      {
+        partner: 'STUDIOKANG × 300FEET',
+        title: "만화 '공포의 외인구단' 설까치가\n디지털 세계로 돌아온다",
+        desc: '원작 IP를 디지털·NFT 콘텐츠로 확장하는 협업이 이어집니다.',
+        date: '2024.12.19',
+        img: './img/news-300feet.jpg',
+        href: 'https://www.mk.co.kr/news/society/11198488',
+        target: '_blank',
+        alt: '300FEET'
+      },
+      {
+        partner: 'STUDIOKANG × TDMETA',
+        title: "'AI 레이싱 엠버서더',\n팬이 직접 투표로 뽑는다고?",
+        desc: 'TDT 챔피언십과 연계한 특별 이벤트로 AI와 팬 참여를 결합했습니다.',
+        date: '2024.12.06',
+        img: './img/news-tdmeta.jpg',
+        href: 'https://biz.heraldcorp.com/article/10009727',
+        target: '_blank',
+        alt: 'TDMETA'
+      }
+    ],
+    2: [
+      {
+        partner: 'promlabs',
+        title: '프롬랩스, AI 프롬프트 번역기 \'Promptly\' 출시…\n"프롬프트? 저는 그냥 한 줄만 써요"',
+        desc: '애매한 명령어도 AI가 이해하는 구조화 프롬프트로 자동 변환.\n자연어 한 줄로 다양한 생성형 AI에 최적화된 입력을 제공한다.',
+        date: '2025.11.13',
+        source: '서울경제',
+        img: './img/news-p2-promptly-sedaily.png',
+        href: 'https://www.sedaily.com/article/14142881',
+        target: '_blank',
+        alt: 'Promptly 서울경제'
+      },
+      {
+        partner: 'promlabs',
+        title: "프롬랩스, AI 프롬프트 번역기 '프롬프틀리' 런칭쇼 성료",
+        desc: '판교스타트업캠퍼스에서 열린 Promptly Pre-Launch Show를\n성황리에 마쳤다. 국내 최초 AI 프롬프트 번역기를 공개했다.',
+        date: '2025.09.17',
+        source: '전자신문',
+        img: './img/news-p2-promptly-launchshow.png',
+        href: 'https://www.etnews.com/20250917000105',
+        target: '_blank',
+        alt: '프롬프틀리 런칭쇼'
+      },
+      {
+        partner: 'STUDIOKANG × 수원시정연구원',
+        title: "수원시정연구원, '2024 수원서베이' 홍보 위해\n'버츄얼 휴먼 강하리'와 협업",
+        desc: '수원서베이 홍보 영상에 버츄얼 휴먼 강하리가 참여,\n시민 참여를 독려하는 혁신적 홍보로 주목받았다.',
+        date: '2024.09.21',
+        source: 'fn투데이',
+        img: './img/news-p2-suwan-hari.png',
+        href: 'https://www.fntoday.co.kr/news/articleView.html?idxno=334794',
+        target: '_blank',
+        alt: '수원서베이 강하리'
+      },
+      {
+        partner: 'VOTUS AI · 인플스톡',
+        title: '세계 최초 생성 AI가 만든 패션 매거진 \'VOTUS AI\' 창간…\n인플스톡, "패션 산업의 새로운 시대 열 것"',
+        desc: '스튜디오캉을 운영하는 인플스톡이 100% AI 제작\n패션 매거진 VOTUS AI 창간 준비호를 발간했다.',
+        date: '2024.08.19',
+        source: 'AI타임스',
+        img: './img/news-p2-votus.png',
+        href: 'https://www.aitimes.kr/news/articleView.html?idxno=31981',
+        target: '_blank',
+        alt: 'VOTUS AI'
+      },
+      {
+        partner: 'STUDIOKANG',
+        title: '[인터뷰] 강동훈 스튜디오캉 대표\n"딥페이크 아닌 딥페이스로 새 디지털마케팅 도전"',
+        desc: '생성형 AI로 가상 인물을 창작하는 딥페이스 기술로\n디지털 마케팅의 새 기회를 제시한다는 비전을 밝혔다.',
+        date: '2024.02.08',
+        source: '캐치뉴스',
+        img: './img/news-p2-interview.png',
+        href: 'https://www.catchnews.kr/news/articleView.html?idxno=87184',
+        target: '_blank',
+        alt: '강동훈 인터뷰'
+      },
+      {
+        partner: 'STUDIOKANG',
+        title: '뷰티·패션모델? 제니만큼 예쁜\nAI모델로 간단히 해결해요',
+        desc: 'AI 바우처 공급기업으로 선정된 스튜디오캉이\n소상공인·중소기업에 버츄얼 모델 마케팅을 제공한다.',
+        date: '2024.01.09',
+        source: '캐치뉴스',
+        img: './img/news-p3-beauty.png',
+        href: 'https://www.catchnews.kr/news/articleView.html?idxno=85274',
+        target: '_blank',
+        alt: 'AI 버츄얼 모델'
+      }
+    ]
   };
 
-  const NEWS_ITEMS = [
-    {
-      cat: 'partnership',
-      badge: 'PARTNERSHIP',
-      partner: 'STUDIOKANG × NUDIC',
-      title: '은퇴자 1,000만명 시대,<br>차세대 AI 간병 매칭<br>플랫폼 떴다',
-      desc: '스튜디오캉·뉴딕 전략적 협약으로<br>요양자와 간병인 실시간 매칭,<br>복지 의료서비스를 AI로 통합<br>관리합니다.',
-      date: '2025.01.03',
-      img: 'https://cdn.imweb.me/thumbnail/20250112/50c414439505e.png',
-      href: 'https://www.mk.co.kr/news/society/11208834',
-      alt: 'STUDIOKANG × NUDIC'
-    },
-    {
-      cat: 'collaboration',
-      badge: 'COLLABORATION',
-      partner: 'STUDIOKANG × 300FEET',
-      title: '만화 \'공포의 외인구단\'<br>설까치가 디지털 세계로<br>돌아온다',
-      desc: '스튜디오캉·300피트 전략적<br>제휴로 공포의 외인구단,<br>슈퍼레이스 NFT 등 디지털<br>콘텐츠로 재탄생합니다.',
-      date: '2024.12.19',
-      img: 'https://cdn.imweb.me/thumbnail/20250112/0c32b1e794922.png',
-      href: 'https://www.mk.co.kr/news/society/11198488',
-      alt: 'STUDIOKANG × 300FEET'
-    },
-    {
-      cat: 'campaign',
-      badge: 'CAMPAIGN',
-      partner: 'STUDIOKANG × TDMETA',
-      title: '\'AI 레이싱 엠버서더\',<br>팬이 직접 투표로<br>뽑는다고?',
-      desc: 'TDT 챔피언십 운영 TDMETA<br>특별이벤트, AI 기술과 팬<br>참여 결합한 1기 선발대회.',
-      date: '2024.12.06',
-      img: 'https://cdn.imweb.me/thumbnail/20250112/32555f4077cc2.png',
-      href: 'https://biz.heraldcorp.com/article/10009727',
-      alt: 'STUDIOKANG × TDMETA'
-    }
-  ];
+  var gridEl = document.getElementById('newsGrid');
+  var paginationEl = document.getElementById('pagination');
+  var currentPage = 1;
+  var totalPages = Object.keys(NEWS_PAGES).length;
 
-  const featuredEl = document.getElementById('newsFeatured');
-  const gridEl = document.getElementById('newsGrid');
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
 
-  function featuredHtml(item) {
-    const bc = BADGE_CLASS[item.cat] || 'badge-partnership';
-    return (
-      '<div class="featured-thumb">' +
-        '<span class="news-badge ' + bc + '">' + item.badge + '</span>' +
-        '<img src="' + item.img + '" alt="' + item.alt.replace(/"/g, '&quot;') + '" loading="lazy">' +
-      '</div>' +
-      '<div class="featured-body">' +
-        '<p class="news-partner">' + item.partner + '</p>' +
-        '<h2 class="featured-title">' + item.title + '</h2>' +
-        '<p class="featured-desc">' + item.desc + '</p>' +
-        '<div class="featured-footer">' +
-          '<span class="news-date">' + item.date + '</span>' +
-          '<a href="' + item.href + '" class="news-more" target="_blank" rel="noopener noreferrer">더 보기 →</a>' +
-        '</div>' +
-      '</div>'
-    );
+  function nlToBr(s) {
+    return esc(s).split('\n').join('<br>');
+  }
+
+  function badgeClass(key) {
+    var map = {
+      partnership: 'badge-partnership',
+      collaboration: 'badge-collaboration',
+      campaign: 'badge-campaign',
+      media: 'badge-media',
+      interview: 'badge-interview'
+    };
+    return map[key] || 'badge-partnership';
   }
 
   function cardHtml(item) {
-    const bc = BADGE_CLASS[item.cat] || 'badge-partnership';
+    var badgeBlock = '';
+    if (item.badgeKey && item.badgeLabel) {
+      badgeBlock =
+        '<span class="news-badge ' +
+        badgeClass(item.badgeKey) +
+        '">' +
+        esc(item.badgeLabel) +
+        '</span>';
+    }
+    var target = item.target ? ' target="' + esc(item.target) + '" rel="noopener noreferrer"' : '';
+    var href = item.href;
+    var isHash = href === '#';
+    var hrefAttr = esc(href);
+    var stopNav = isHash ? ' onclick="return false;"' : '';
+    var dateLine = item.source
+      ? esc(item.date) + ' · ' + esc(item.source)
+      : esc(item.date);
+
     return (
-      '<a class="news-card" data-cat="' + item.cat + '" href="' + item.href + '" target="_blank" rel="noopener noreferrer">' +
-        '<div class="news-thumb">' +
-          '<span class="news-badge ' + bc + '">' + item.badge + '</span>' +
-          '<img src="' + item.img + '" alt="' + item.alt.replace(/"/g, '&quot;') + '" loading="lazy">' +
-        '</div>' +
-        '<div class="news-body">' +
-          '<p class="card-partner">' + item.partner + '</p>' +
-          '<h3 class="card-title">' + item.title + '</h3>' +
-          '<p class="card-desc">' + item.desc + '</p>' +
-          '<div class="card-footer">' +
-            '<span class="news-date">' + item.date + '</span>' +
-            '<span class="news-more">더 보기 →</span>' +
-          '</div>' +
-        '</div>' +
+      '<a class="news-card" href="' +
+      hrefAttr +
+      '"' +
+      target +
+      stopNav +
+      '>' +
+      '<div class="news-thumb news-img-wrap">' +
+      badgeBlock +
+      '<img src="' +
+      esc(item.img) +
+      '" alt="' +
+      esc(item.alt || '') +
+      '" loading="lazy" onerror="' +
+      IMG_ONERR +
+      '">' +
+      '</div>' +
+      '<div class="news-body">' +
+      '<p class="card-partner">' +
+      esc(item.partner) +
+      '</p>' +
+      '<h3 class="card-title">' +
+      nlToBr(item.title) +
+      '</h3>' +
+      '<p class="card-desc">' +
+      nlToBr(item.desc) +
+      '</p>' +
+      '<div class="card-footer">' +
+      '<span class="news-date">' +
+      dateLine +
+      '</span>' +
+      '<span class="news-more">더 보기 →</span>' +
+      '</div>' +
+      '</div>' +
       '</a>'
     );
   }
 
-  function applyNewsFilter(f) {
-    const list =
-      f === 'all'
-        ? NEWS_ITEMS.slice()
-        : NEWS_ITEMS.filter(function (item) {
-            return item.cat === f;
-          });
+  function renderNewsGrid(pageNum) {
+    var list = NEWS_PAGES[pageNum];
+    if (!list) return;
+    gridEl.innerHTML = list.map(cardHtml).join('');
+    var cards = gridEl.querySelectorAll('.news-card');
+    cards.forEach(function (card) {
+      card.style.animation = 'none';
+    });
+    void gridEl.offsetWidth;
+    cards.forEach(function (card, index) {
+      card.style.animation = '';
+      card.style.animationName = 'cardFadeIn';
+      card.style.animationDuration = '0.45s';
+      card.style.animationTimingFunction = 'ease';
+      card.style.animationFillMode = 'forwards';
+      card.style.animationDelay = index * 0.07 + 's';
+    });
+  }
 
-    if (list.length === 0) {
-      featuredEl.style.display = 'none';
-      gridEl.innerHTML = '';
+  function updatePaginationUI(pageNum) {
+    var btns = paginationEl.querySelectorAll('.page-btn');
+    btns.forEach(function (btn) {
+      var n = parseInt(btn.getAttribute('data-page'), 10);
+      btn.classList.toggle('active', n === pageNum);
+    });
+    var prevBtn = document.getElementById('prev-btn');
+    var nextBtn = document.getElementById('next-btn');
+    if (prevBtn) prevBtn.disabled = pageNum <= 1;
+    if (nextBtn) nextBtn.disabled = pageNum >= totalPages;
+  }
+
+  function buildPagination() {
+    var html =
+      '<button type="button" class="page-arrow" id="prev-btn" aria-label="이전 페이지">←</button>';
+    var p;
+    for (p = 1; p <= totalPages; p++) {
+      html +=
+        '<button type="button" class="page-btn' +
+        (p === currentPage ? ' active' : '') +
+        '" data-page="' +
+        p +
+        '">' +
+        p +
+        '</button>';
+    }
+    html +=
+      '<button type="button" class="page-arrow" id="next-btn" aria-label="다음 페이지">→</button>';
+    paginationEl.innerHTML = html;
+
+    document.getElementById('prev-btn').addEventListener('click', function () {
+      goToPage(currentPage - 1, { scroll: true });
+    });
+    document.getElementById('next-btn').addEventListener('click', function () {
+      goToPage(currentPage + 1, { scroll: true });
+    });
+    paginationEl.querySelectorAll('.page-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var n = parseInt(btn.getAttribute('data-page'), 10);
+        goToPage(n, { scroll: true });
+      });
+    });
+  }
+
+  function clampPage(n) {
+    var p = parseInt(n, 10);
+    if (isNaN(p) || p < 1) return 1;
+    if (p > totalPages) return totalPages;
+    return p;
+  }
+
+  function syncUrl(pageNum) {
+    if (pageNum > 1) {
+      history.pushState(null, '', '#page-' + pageNum);
+    } else {
+      history.pushState(null, '', location.pathname + location.search);
+    }
+  }
+
+  function goToPage(pageNum, opts) {
+    opts = opts || {};
+    var scrollToHero = opts.scroll === true;
+    var animate = opts.animate !== false;
+
+    var target = clampPage(pageNum);
+    if (target === currentPage && !opts.force) {
+      if (scrollToHero) {
+        var hero = document.querySelector('.news-hero');
+        if (hero) hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
       return;
     }
 
-    const first = list[0];
-    const rest = list.slice(1);
+    function applyPage() {
+      currentPage = target;
+      renderNewsGrid(currentPage);
+      updatePaginationUI(currentPage);
+      syncUrl(currentPage);
+      gridEl.style.opacity = '1';
+      if (scrollToHero) {
+        var h = document.querySelector('.news-hero');
+        if (h) h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
 
-    featuredEl.dataset.cat = first.cat;
-    featuredEl.innerHTML = featuredHtml(first);
-    featuredEl.style.display = 'grid';
+    if (!animate) {
+      applyPage();
+      return;
+    }
 
-    gridEl.innerHTML = rest.map(cardHtml).join('');
+    gridEl.style.transition = 'opacity 0.3s ease';
+    gridEl.style.opacity = '0';
+    window.setTimeout(function () {
+      applyPage();
+    }, 300);
   }
 
-  document.querySelectorAll('.news-page .tab').forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      document.querySelectorAll('.news-page .tab').forEach(function (t) {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
+  window.goToPage = function (n, opts) {
+    goToPage(n, opts || {});
+  };
 
-      var f = tab.dataset.filter;
-      applyNewsFilter(f);
-    });
+  function onHashOrPop() {
+    var m = window.location.hash.match(/^#page-(\d+)$/);
+    var p = m ? parseInt(m[1], 10) : 1;
+    p = clampPage(p);
+    if (p !== currentPage) {
+      goToPage(p, { animate: true, scroll: false, force: true });
+    }
+  }
+
+  window.addEventListener('hashchange', onHashOrPop);
+  window.addEventListener('popstate', function () {
+    onHashOrPop();
   });
 
-  applyNewsFilter('all');
+  document.addEventListener('DOMContentLoaded', function () {
+    var m = window.location.hash.match(/^#page-(\d+)$/);
+    var initPage = m ? parseInt(m[1], 10) : 1;
+    initPage = clampPage(initPage);
+    buildPagination();
+    goToPage(initPage, { animate: false, scroll: false, force: true });
+    if (m && initPage > 1) {
+      var hero = document.querySelector('.news-hero');
+      if (hero) hero.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
 })();
 </script>
 <script src="js/main.js"></script>

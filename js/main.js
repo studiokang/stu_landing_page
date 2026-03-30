@@ -42,16 +42,27 @@
     if(newsLink)newsLink.classList.add('nav-link-active');
   })();
 
-  /* SERVICES → #services: smooth scroll on landing; other pages follow link to /#services */
-  var servicesA=document.querySelector('a[href="/#services"]');
-  if(servicesA){servicesA.addEventListener('click',function(e){
-    var p=window.location.pathname||'';
-    var onLanding=(p==='/'||/\/index\.html$/i.test(p));
-    if(!onLanding)return;
-    e.preventDefault();
-    var sec=document.getElementById('services');
-    if(sec)sec.scrollIntoView({behavior:'smooth'});
-  });}
+  /* SERVICES → #what-we-do: smooth scroll on landing */
+  document.querySelectorAll('a[href="/#what-we-do"]').forEach(function(servicesA){
+    servicesA.addEventListener('click',function(e){
+      var p=window.location.pathname||'';
+      var onLanding=(p==='/'||/\/index\.html$/i.test(p));
+      if(!onLanding)return;
+      e.preventDefault();
+      var sec=document.getElementById('what-we-do');
+      if(sec)sec.scrollIntoView({behavior:'smooth'});
+    });
+  });
+  document.querySelectorAll('a[href="/#portfolio"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var p=window.location.pathname||'';
+      var onLanding=(p==='/'||/\/index\.html$/i.test(p));
+      if(!onLanding)return;
+      e.preventDefault();
+      var sec=document.getElementById('portfolio');
+      if(sec)sec.scrollIntoView({behavior:'smooth'});
+    });
+  });
 
   /* Scroll reveal */
   var obs=new IntersectionObserver(function(ents){ents.forEach(function(en){if(en.isIntersecting){en.target.classList.add('visible');obs.unobserve(en.target);}});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
@@ -112,33 +123,50 @@
   });},{threshold:.5});
   document.querySelectorAll('[data-target]').forEach(function(el){cobs.observe(el);});
 
-  /* CTA Form (index.html 하단) — contact.html 과 동일하게 /api/submit-email */
-  var form=document.getElementById('ctaForm'),email=document.getElementById('ctaEmail'),err=document.getElementById('ctaErr'),ok=document.getElementById('ctaOk');
-  if(form && email){
-    var ctaBtn = form.querySelector('.cta-submit');
-    form.addEventListener('submit',function(e){
-      e.preventDefault();
-      var v=email.value.trim();
-      err.classList.remove('show');ok.classList.remove('show');form.classList.remove('error');
-      if(!v||v.indexOf('@')===-1||v.indexOf('.')===-1){form.classList.add('error');err.classList.add('show');err.textContent='올바른 이메일 주소를 입력해 주세요.';return;}
-      var btnHtml = ctaBtn ? ctaBtn.innerHTML : '';
-      if(ctaBtn){ctaBtn.disabled=true;ctaBtn.textContent='전송 중...';}
-      fetch('/api/submit-email',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({email:v})}).then(function(res){
-        if(ctaBtn){ctaBtn.disabled=false;ctaBtn.innerHTML=btnHtml;}
-        if(res.ok){ok.classList.add('show');email.value='';}
-        else{res.text().then(function(text){
-          form.classList.add('error');
-          err.textContent='전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
-          err.classList.add('show');
-        }).catch(function(){form.classList.add('error');err.classList.add('show');});}
-      }).catch(function(){
-        if(ctaBtn){ctaBtn.disabled=false;ctaBtn.innerHTML=btnHtml;}
-        form.classList.add('error');
-        err.textContent='네트워크 오류가 발생했습니다.';
-        err.classList.add('show');
+  /* Before / After — 탭 전환 + 페이드 (index.html #before-after) */
+  (function(){
+    var BA_CASES = [
+      {
+        before: 'img/ba/before-product.png',
+        after: 'img/ba/after-product2.png'
+      },
+      {
+        before: 'img/ba/before-fashion.png',
+        after: 'img/ba/after-fashion.png'
+      },
+      {
+        before: 'img/ba/before-life.png',
+        after: 'img/ba/after-life.png'
+      }
+    ];
+    var baTabs = document.querySelectorAll('.ba-section .ba-tab');
+    var baBeforeImg = document.getElementById('ba-before-img');
+    var baAfterImg = document.getElementById('ba-after-img');
+    if (!baTabs.length || !baBeforeImg || !baAfterImg) return;
+
+    baBeforeImg.src = BA_CASES[0].before;
+    baAfterImg.src = BA_CASES[0].after;
+
+    function switchCase(index) {
+      if (index < 0 || index >= BA_CASES.length) return;
+      baTabs.forEach(function(t, i) {
+        t.classList.toggle('active', i === index);
+        t.setAttribute('aria-selected', i === index ? 'true' : 'false');
       });
+      baBeforeImg.style.opacity = '0';
+      baAfterImg.style.opacity = '0';
+      setTimeout(function() {
+        baBeforeImg.src = BA_CASES[index].before;
+        baAfterImg.src = BA_CASES[index].after;
+        baBeforeImg.style.opacity = '1';
+        baAfterImg.style.opacity = '1';
+      }, 220);
+    }
+
+    baTabs.forEach(function(tab, i) {
+      tab.addEventListener('click', function() { switchCase(i); });
     });
-  }
+  })();
 
   /* Typewriter */
   (function(){
@@ -149,11 +177,10 @@
 
     var lines = [
       { el: line1El, segments: [
-        { text: 'No More ', cls: 'dim' },
-        { text: 'Impossible,', cls: '' }
+        { text: 'No More Impossible,', cls: '' }
       ]},
       { el: line2El, segments: [
-        { text: 'Only Possible.', cls: 'lime' }
+        { text: 'Just Possible.', cls: 'lime' }
       ]}
     ];
 
@@ -318,4 +345,104 @@
       emailInput.style.borderColor = '';
     });
   }
+
+  /* Contact page: 견적 / 협업 탭 + ?type= */
+  (function(){
+    var estimatePanel = document.getElementById('estimatePanel');
+    var collabPanel = document.getElementById('collaborationPanel');
+    var tabs = document.querySelectorAll('.contact-type-tabs .type-tab');
+    if (!estimatePanel || !collabPanel || !tabs.length) return;
+
+    function setType(type) {
+      var isEst = type === 'estimate';
+      estimatePanel.style.display = isEst ? '' : 'none';
+      collabPanel.style.display = isEst ? 'none' : '';
+      tabs.forEach(function(t) {
+        var active = t.getAttribute('data-type') === type;
+        t.classList.toggle('active', active);
+        t.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    }
+
+    var params = new URLSearchParams(window.location.search || '');
+    var initial = params.get('type') === 'collaboration' ? 'collaboration' : 'estimate';
+    setType(initial);
+
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var type = tab.getAttribute('data-type') || 'estimate';
+        setType(type);
+        if (history.replaceState) {
+          var u = new URL(window.location.href);
+          u.searchParams.set('type', type);
+          history.replaceState({}, '', u.pathname + u.search);
+        }
+      });
+    });
+
+    var collabForm = document.getElementById('collaborationForm');
+    var collabSuccessState = document.getElementById('collabSuccessState');
+    if (collabForm) {
+      collabForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        var company = (document.getElementById('collabCompany') || {}).value || '';
+        var name = (document.getElementById('collabName') || {}).value || '';
+        var email = (document.getElementById('collabEmail') || {}).value || '';
+        var phone = (document.getElementById('collabPhone') || {}).value || '';
+        var detail = (document.getElementById('collabDetail') || {}).value || '';
+        var types = [];
+        collabForm.querySelectorAll('input[name="collabType"]:checked').forEach(function(cb) {
+          types.push(cb.value);
+        });
+        var submitBtn = collabForm.querySelector('.collab-submit');
+        var btnHtml = submitBtn ? submitBtn.innerHTML : '';
+        if (submitBtn) {
+          submitBtn.classList.add('loading');
+          submitBtn.textContent = '';
+        }
+
+        fetch('/api/submit-collaboration', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json'
+          },
+          body: JSON.stringify({
+            company_name: company.trim(),
+            contact_name: name.trim(),
+            email: email.trim(),
+            phone: phone.trim(),
+            collaboration_types: types,
+            detail: detail.trim()
+          })
+        }).then(function(res) {
+          if (submitBtn) {
+            submitBtn.classList.remove('loading');
+            submitBtn.innerHTML = btnHtml;
+          }
+          if (res.ok) {
+            collabForm.style.display = 'none';
+            if (collabSuccessState) collabSuccessState.style.display = 'block';
+          } else {
+            res.text().then(function(text) {
+              var msg = text;
+              try {
+                var data = JSON.parse(text);
+                msg = (data && (data.detail || data.error || data.message)) ? String(data.detail || data.error || data.message) : text;
+              } catch (ignore) {}
+              window.alert('전송 실패 HTTP ' + res.status + '\n\n' + (msg || text).slice(0, 400));
+            }).catch(function() {
+              window.alert('전송에 실패했습니다. (HTTP ' + res.status + ')');
+            });
+          }
+        }).catch(function() {
+          if (submitBtn) {
+            submitBtn.classList.remove('loading');
+            submitBtn.innerHTML = btnHtml;
+          }
+          window.alert('네트워크 오류가 발생했습니다.');
+        });
+      });
+    }
+  })();
 })();

@@ -20,13 +20,13 @@
   <div class="nav-inner">
     <a href="/" class="nav-logo"><img src="assets/logo-studiokang.png" alt="STUDIOKANG"></a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="/#services">Services</a></li>
-      <li><a href="projects.html">Showreel</a></li>
+      <li><a href="/#what-we-do">Services</a></li>
+      <li><a href="/#portfolio">Portfolio</a></li>
       <li><a href="/votus.html">VOTUS</a></li>
       <li><a href="/news">News</a></li>
       <li><a href="contact.html" class="nav-link-active">Contact</a></li>
     </ul>
-    <a href="contact.html" class="nav-cta">무료 견적 받기</a>
+    <a href="contact.html" class="nav-cta">1분 견적 받기</a>
     <button class="nav-mobile" id="navToggle" aria-label="메뉴"><span></span><span></span><span></span></button>
   </div>
 </nav>
@@ -134,7 +134,7 @@
           </div>
           <div class="info-item">
             <span class="info-label">LOCATION</span>
-            <span class="info-val info-val--loc">경기도 수원시 영통구<br>경기대학교 창업보육센터</span>
+            <span class="info-val info-val--loc">경기도 수원시 영통구 광교산로 154-42<br>경기대학교 창업보육센터 N동 N호</span>
           </div>
         </div>
         <div class="contact-line" aria-hidden="true"></div>
@@ -150,80 +150,141 @@
     <div class="contact-right">
       <div class="contact-form-wrap">
 
-        <div class="form-header">
-          <div class="form-step-label">
-            QUICK ESTIMATE
-          </div>
-          <h2 class="form-title">
-            이메일 하나로<br>
-            <span class="lime">견적서를 받아보세요.</span>
-          </h2>
-          <p class="form-sub">
-            복잡한 양식 없이 이메일만 입력하면
-            맞춤 견적 시스템 링크를
-            보내드립니다.
-          </p>
+        <div class="contact-type-tabs" role="tablist" aria-label="문의 유형">
+          <button type="button" class="type-tab active" data-type="estimate" role="tab" aria-selected="true">견적 문의</button>
+          <button type="button" class="type-tab" data-type="collaboration" role="tab" aria-selected="false">협업 문의</button>
         </div>
 
-        <form class="email-form" id="contactForm" novalidate>
-          <div class="email-input-wrap">
-            <input
-              type="email"
-              id="emailInput"
-              name="email"
-              class="email-input"
-              placeholder="hello@brand.com"
-              required
-              autocomplete="email"
-            />
-            <button type="submit" class="email-submit">
-              견적 받기
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12,5 19,12 12,19"/>
+        <div id="estimatePanel">
+          <div class="form-header">
+            <div class="form-step-label">
+              QUICK ESTIMATE
+            </div>
+            <h2 class="form-title">
+              이메일 하나로<br>
+              <span class="lime">견적서를 받아보세요.</span>
+            </h2>
+            <p class="form-sub">
+              복잡한 양식 없이 이메일만 입력하면
+              맞춤 견적 시스템 링크를
+              보내드립니다.
+            </p>
+          </div>
+
+          <form class="email-form" id="contactForm" novalidate>
+            <div class="email-input-wrap">
+              <input
+                type="email"
+                id="emailInput"
+                name="email"
+                class="email-input"
+                placeholder="hello@brand.com"
+                required
+                autocomplete="email"
+              />
+              <button type="submit" class="email-submit">
+                견적 받기
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12,5 19,12 12,19"/>
+                </svg>
+              </button>
+            </div>
+
+            <p class="email-notice">
+              스팸 메일을 보내지 않습니다.
+              언제든지 수신 거부 가능합니다.
+            </p>
+          </form>
+
+          <div class="success-state" id="successState" style="display:none">
+            <div class="success-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C8FF00" stroke-width="2" aria-hidden="true">
+                <polyline points="20,6 9,17 4,12"/>
               </svg>
-            </button>
+            </div>
+            <h3 class="success-title">
+              메일을 확인해주세요.
+            </h3>
+            <p class="success-desc">
+              <span id="sentEmail"></span>으로<br>
+              견적 시스템 링크를 발송했습니다.
+            </p>
+            <p class="success-sub">
+              메일이 오지 않는 경우 스팸함을
+              확인하거나 아래로 직접 문의해주세요.
+            </p>
+            <a href="mailto:business@studiokang.ai" class="direct-contact">
+              business@studiokang.ai →
+            </a>
           </div>
 
-          <p class="email-notice">
-            스팸 메일을 보내지 않습니다.
-            언제든지 수신 거부 가능합니다.
-          </p>
-        </form>
+          <div class="form-divider"></div>
 
-        <div class="success-state" id="successState" style="display:none">
-          <div class="success-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C8FF00" stroke-width="2" aria-hidden="true">
-              <polyline points="20,6 9,17 4,12"/>
-            </svg>
+          <div class="direct-options">
+            <p class="direct-label">
+              직접 연락을 원하시면
+            </p>
+            <div class="direct-links">
+              <a href="mailto:business@studiokang.ai" class="direct-link">
+                <span class="dl-icon">✉</span>
+                <span>이메일로 문의하기</span>
+              </a>
+            </div>
           </div>
-          <h3 class="success-title">
-            메일을 확인해주세요.
-          </h3>
-          <p class="success-desc">
-            <span id="sentEmail"></span>으로<br>
-            견적 시스템 링크를 발송했습니다.
-          </p>
-          <p class="success-sub">
-            메일이 오지 않는 경우 스팸함을
-            확인하거나 아래로 직접 문의해주세요.
-          </p>
-          <a href="mailto:business@studiokang.ai" class="direct-contact">
-            business@studiokang.ai →
-          </a>
         </div>
 
-        <div class="form-divider"></div>
+        <div id="collaborationPanel" style="display:none">
+          <div class="form-header">
+            <div class="form-step-label">COLLABORATION</div>
+            <h2 class="form-title">협업 <span class="lime">문의하기</span></h2>
+            <p class="form-sub">브랜드·미디어·기술 파트너십 및 투자 관련 제안을 남겨 주세요.</p>
+          </div>
 
-        <div class="direct-options">
-          <p class="direct-label">
-            직접 연락을 원하시면
-          </p>
-          <div class="direct-links">
-            <a href="mailto:business@studiokang.ai" class="direct-link">
-              <span class="dl-icon">✉</span>
-              <span>이메일로 문의하기</span>
-            </a>
+          <form class="collab-form" id="collaborationForm" novalidate>
+            <label class="collab-field">
+              <span class="collab-label">회사명</span>
+              <input type="text" id="collabCompany" name="company" class="collab-input" autocomplete="organization">
+            </label>
+            <label class="collab-field">
+              <span class="collab-label">이름</span>
+              <input type="text" id="collabName" name="name" class="collab-input" autocomplete="name" required>
+            </label>
+            <label class="collab-field">
+              <span class="collab-label">이메일</span>
+              <input type="email" id="collabEmail" name="email" class="collab-input" autocomplete="email" required>
+            </label>
+            <label class="collab-field">
+              <span class="collab-label">연락처</span>
+              <input type="tel" id="collabPhone" name="phone" class="collab-input" autocomplete="tel">
+            </label>
+            <fieldset class="collab-field collab-checks">
+              <legend class="collab-label">협업 유형</legend>
+              <label class="collab-check"><input type="checkbox" name="collabType" value="브랜드 협업"> 브랜드 협업</label>
+              <label class="collab-check"><input type="checkbox" name="collabType" value="미디어 파트너십"> 미디어 파트너십</label>
+              <label class="collab-check"><input type="checkbox" name="collabType" value="기술 파트너십"> 기술 파트너십</label>
+              <label class="collab-check"><input type="checkbox" name="collabType" value="투자/IR"> 투자/IR</label>
+            </fieldset>
+            <label class="collab-field">
+              <span class="collab-label">상세 내용</span>
+              <textarea id="collabDetail" name="detail" class="collab-textarea" rows="5" required></textarea>
+            </label>
+            <button type="submit" class="collab-submit">협업 문의 보내기</button>
+            <p class="collab-mailto-note">제출하신 내용은 안전하게 저장되며, 영업일 기준으로 검토 후 연락드립니다.</p>
+          </form>
+
+          <div class="success-state collab-success" id="collabSuccessState" style="display:none" aria-live="polite">
+            <div class="success-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C8FF00" stroke-width="2" aria-hidden="true">
+                <polyline points="20,6 9,17 4,12"/>
+              </svg>
+            </div>
+            <h3 class="success-title">협업 문의가 접수되었습니다.</h3>
+            <p class="success-desc">
+              남겨 주신 연락처로 영업일 기준으로<br>
+              빠르게 회신드리겠습니다.
+            </p>
+            <a href="mailto:business@studiokang.ai" class="direct-contact">business@studiokang.ai →</a>
           </div>
         </div>
 
@@ -237,7 +298,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-logo"><img src="assets/logo-studiokang.png" alt="STUDIOKANG"></div>
-        <p class="footer-tagline">AI 콘텐츠 제작 에이전시.<br>No More Impossible, Only Possible.</p>
+        <p class="footer-tagline">AI 콘텐츠 제작 에이전시.<br>No More Impossible, Just Possible.</p>
       </div>
       <div class="footer-col">
         <h4>서비스</h4>
@@ -253,7 +314,7 @@
       </div>
       <div class="footer-col">
         <h4>주소</h4>
-        <p>경기도 수원시 영통구<br>경기대학교 창업보육센터<br>507~8호</p>
+        <p>경기도 수원시 영통구 광교산로 154-42<br>경기대학교 창업보육센터 N동 N호</p>
       </div>
     </div>
     <div class="footer-bottom">
