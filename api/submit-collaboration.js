@@ -9,7 +9,7 @@
  * 알림 메일 (선택 — RESEND_API_KEY 없으면 DB만 저장하고 메일은 생략):
  *   RESEND_API_KEY
  *   COLLAB_NOTIFY_EMAIL (미설정 시 위 두 주소 — 쉼표로 덮어쓰기 가능, 예: a@x.com,b@y.com)
- *   RESEND_FROM (기본: STUDIOKANG <onboarding@resend.dev> — 운영 시 도메인 인증 후 noreply@studiokang.ai 등으로 변경)
+ *   RESEND_FROM (선택 — 미설정 시 STUDIOKANG <noreply@studiokang.ai>, Resend 도메인 인증 필요. 한 줄로만 입력)
  */
 
 function readBodyStream(req) {
@@ -51,6 +51,13 @@ function parseNotifyEmails(raw) {
   return list.length ? list : defaults.slice();
 }
 
+/** Vercel 환경 변수에 줄바꿈이 들어가면 from 이 깨져 Resend 오류 — 제거 */
+function normalizeResendFrom(raw) {
+  var def = 'STUDIOKANG <noreply@studiokang.ai>';
+  if (!raw || !String(raw).trim()) return def;
+  return String(raw).replace(/[\r\n]+/g, '').replace(/\s{2,}/g, ' ').trim();
+}
+
 /**
  * Resend REST API — https://resend.com/docs/api-reference/emails/send-email
  * 실패해도 예외를 던지지 않음 (DB 저장은 이미 성공한 상태)
@@ -63,7 +70,7 @@ function sendCollaborationNotifyEmail(env, row) {
   }
 
   var toList = parseNotifyEmails(env.COLLAB_NOTIFY_EMAIL || '');
-  var from = (env.RESEND_FROM || 'STUDIOKANG <onboarding@resend.dev>').trim();
+  var from = normalizeResendFrom(env.RESEND_FROM);
   var typesStr = (row.types && row.types.length) ? row.types.join(', ') : '(선택 없음)';
   var companyLine = row.companyName ? row.companyName : '(없음)';
 
