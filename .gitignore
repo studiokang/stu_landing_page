@@ -19,3 +19,5 @@ npm-debug.log*
 
 # Optional local tooling
 node_modules/
+.vercel
+.env*.local

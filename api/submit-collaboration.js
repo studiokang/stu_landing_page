@@ -1,6 +1,6 @@
 /**
  * Vercel Serverless — 협업 문의 폼 → Supabase collaboration_inquiries INSERT (service_role)
- * 이후 선택적으로 Resend로 business@studiokang.ai 에 알림 메일 발송
+ * 이후 선택적으로 Resend로 알림 메일 발송 (기본 수신: business@studiokang.ai, jieuny@promlabs.ai)
  *
  * Supabase:
  *   SUPABASE_URL 또는 NEXT_PUBLIC_SUPABASE_URL
@@ -8,7 +8,7 @@
  *
  * 알림 메일 (선택 — RESEND_API_KEY 없으면 DB만 저장하고 메일은 생략):
  *   RESEND_API_KEY
- *   COLLAB_NOTIFY_EMAIL (기본: business@studiokang.ai)
+ *   COLLAB_NOTIFY_EMAIL (미설정 시 위 두 주소 — 쉼표로 덮어쓰기 가능, 예: a@x.com,b@y.com)
  *   RESEND_FROM (기본: STUDIOKANG <onboarding@resend.dev> — 운영 시 도메인 인증 후 noreply@studiokang.ai 등으로 변경)
  */
 
@@ -43,6 +43,14 @@ function escapeHtml(s) {
     .replace(/"/g, '&quot;');
 }
 
+/** 쉼표 구분 수신자 — COLLAB_NOTIFY_EMAIL 미설정 시 business + jieuny 고정 */
+function parseNotifyEmails(raw) {
+  var defaults = ['business@studiokang.ai', 'jieuny@promlabs.ai'];
+  if (!raw || !String(raw).trim()) return defaults.slice();
+  var list = String(raw).split(',').map(function (s) { return s.trim(); }).filter(Boolean);
+  return list.length ? list : defaults.slice();
+}
+
 /**
  * Resend REST API — https://resend.com/docs/api-reference/emails/send-email
  * 실패해도 예외를 던지지 않음 (DB 저장은 이미 성공한 상태)
@@ -54,7 +62,7 @@ function sendCollaborationNotifyEmail(env, row) {
     return Promise.resolve();
   }
 
-  var to = (env.COLLAB_NOTIFY_EMAIL || 'business@studiokang.ai').trim();
+  var toList = parseNotifyEmails(env.COLLAB_NOTIFY_EMAIL || '');
   var from = (env.RESEND_FROM || 'STUDIOKANG <onboarding@resend.dev>').trim();
   var typesStr = (row.types && row.types.length) ? row.types.join(', ') : '(선택 없음)';
   var companyLine = row.companyName ? row.companyName : '(없음)';
@@ -88,7 +96,7 @@ function sendCollaborationNotifyEmail(env, row) {
 
   var body = {
     from: from,
-    to: [to],
+    to: toList,
     subject: subj,
     text: text,
     html: html,

@@ -18,4 +18,14 @@ create index if not exists collaboration_inquiries_created_at_idx
 comment on table public.collaboration_inquiries is 'Contact page — 협업 문의 (Vercel API + service_role)';
 
 alter table public.collaboration_inquiries enable row level security;
--- service_role 은 RLS 우회. anon 은 정책 없으면 접근 불가.
+-- service_role 은 RLS 우회. Vercel에 anon 키만 있을 때는 아래 정책 + grant 필요.
+
+grant usage on schema public to anon;
+grant insert on table public.collaboration_inquiries to anon;
+
+drop policy if exists "collaboration_inquiries_insert_anon" on public.collaboration_inquiries;
+create policy "collaboration_inquiries_insert_anon"
+  on public.collaboration_inquiries
+  for insert
+  to anon
+  with check (true);
